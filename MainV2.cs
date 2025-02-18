@@ -596,8 +596,8 @@ namespace MissionPlanner
 
         public void updateLayout(object sender, EventArgs e)
         {
-            MenuSimulation.Visible = DisplayConfiguration.displaySimulation;
-            MenuHelp.Visible = DisplayConfiguration.displayHelp;
+            //MenuSimulation.Visible = DisplayConfiguration.displaySimulation;
+            //MenuHelp.Visible = DisplayConfiguration.displayHelp;
             MissionPlanner.Controls.BackstageView.BackstageView.Advanced = DisplayConfiguration.isAdvancedMode;
 
             // force autohide on
@@ -1068,7 +1068,7 @@ namespace MissionPlanner
 
 #endif
 #endif
-
+            /*
             if (Program.IconFile != null)
             {
                 this.Icon = Icon.FromHandle(((Bitmap) Program.IconFile).GetHicon());
@@ -1080,7 +1080,7 @@ namespace MissionPlanner
 
             if (Program.Logo2 != null)
                 MenuArduPilot.Image = Program.Logo2;
-
+            */
             Application.DoEvents();
 
             Comports.Add(comPort);
@@ -1088,7 +1088,7 @@ namespace MissionPlanner
             MainV2.comPort.MavChanged += comPort_MavChanged;
 
             // save config to test we have write access
-            SaveConfig();
+            SaveConfig(); 
         }
 
         void cmb_sysid_Click(object sender, EventArgs e)
@@ -1169,7 +1169,7 @@ namespace MissionPlanner
             MenuSimulation.Image = displayicons.sim;
             MenuConfigTune.Image = displayicons.config_tuning;
             MenuConnect.Image = displayicons.connect;
-            MenuHelp.Image = displayicons.help;
+            //MenuHelp.Image = displayicons.help;
 
 
             MenuFlightData.ForeColor = ThemeManager.TextColor;
@@ -1178,7 +1178,7 @@ namespace MissionPlanner
             MenuSimulation.ForeColor = ThemeManager.TextColor;
             MenuConfigTune.ForeColor = ThemeManager.TextColor;
             MenuConnect.ForeColor = ThemeManager.TextColor;
-            MenuHelp.ForeColor = ThemeManager.TextColor;
+            //MenuHelp.ForeColor = ThemeManager.TextColor;
         }
 
         void adsb_UpdatePlanePosition(object sender, MissionPlanner.Utilities.adsb.PointLatLngAltHdg adsb)
@@ -1292,7 +1292,7 @@ namespace MissionPlanner
 
         private void MenuFlightData_Click(object sender, EventArgs e)
         {
-            MyView.ShowScreen("FlightData");
+            //MyView.ShowScreen("FlightData");
 
             // save config
             SaveConfig();
@@ -1308,6 +1308,7 @@ namespace MissionPlanner
 
         public void MenuSetup_Click(object sender, EventArgs e)
         {
+            /*
             if (Settings.Instance.GetBoolean("password_protect") == false)
             {
                 MyView.ShowScreen("HWConfig");
@@ -1331,11 +1332,12 @@ namespace MissionPlanner
                     MyView.ShowScreen("HWConfig");
                 }
             }
+            */
         }
 
         private void MenuSimulation_Click(object sender, EventArgs e)
         {
-            MyView.ShowScreen("Simulation");
+            //MyView.ShowScreen("Simulation");
         }
 
         private void MenuTuning_Click(object sender, EventArgs e)
@@ -3163,7 +3165,7 @@ namespace MissionPlanner
             MyView.AddScreen(new MainSwitcher.Screen("HWConfig", typeof(GCSViews.InitialSetup), false));
             MyView.AddScreen(new MainSwitcher.Screen("SWConfig", typeof(GCSViews.SoftwareConfig), false));
             MyView.AddScreen(new MainSwitcher.Screen("Simulation", Simulation, true));
-            MyView.AddScreen(new MainSwitcher.Screen("Help", typeof(GCSViews.Help), false));
+            //MyView.AddScreen(new MainSwitcher.Screen("Help", typeof(GCSViews.Help), false));
 
             try
             {
@@ -4029,7 +4031,7 @@ namespace MissionPlanner
 
         private void MenuHelp_Click(object sender, EventArgs e)
         {
-            MyView.ShowScreen("Help");
+            //MyView.ShowScreen("Help");
         }
 
 
@@ -4652,6 +4654,7 @@ namespace MissionPlanner
 
         private void MenuArduPilot_Click(object sender, EventArgs e)
         {
+            /*
             try
             {
                 System.Diagnostics.Process.Start("https://ardupilot.org/?utm_source=Menu&utm_campaign=MP");
@@ -4660,6 +4663,7 @@ namespace MissionPlanner
             {
                 CustomMessageBox.Show("Failed to open url https://ardupilot.org");
             }
+            */
         }
 
         private void connectionListToolStripMenuItem_Click(object sender, EventArgs e)
