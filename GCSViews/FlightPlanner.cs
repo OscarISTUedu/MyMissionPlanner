@@ -3432,13 +3432,7 @@ namespace MissionPlanner.GCSViews
                 });
             }
 
-            TRK_zoom.Minimum = MainMap.MapProvider.MinZoom;
-            TRK_zoom.Maximum = 24;
-            TRK_zoom.Value = (float)MainMap.Zoom;
 
-            Zoomlevel.Minimum = MainMap.MapProvider.MinZoom;
-            Zoomlevel.Maximum = 24;
-            Zoomlevel.Value = Convert.ToDecimal(MainMap.Zoom);
 
             updateCMDParams();
 
@@ -4950,15 +4944,10 @@ namespace MissionPlanner.GCSViews
             // this is a mono fix for the zoom bar
             //Console.WriteLine("panelmap "+panelMap.Size.ToString());
             MainMap.Size = new Size(panelMap.Size.Width - 50, panelMap.Size.Height);
-            TRK_zoom.Location = new Point(panelMap.Size.Width - 50, TRK_zoom.Location.Y);
-            TRK_zoom.Size = new Size(TRK_zoom.Size.Width, panelMap.Size.Height - TRK_zoom.Location.Y);
-            label11.Location = new Point(panelMap.Size.Width - 50, label11.Location.Y);
         }
 
         public void Planner_Resize(object sender, EventArgs e)
         {
-            MainMap.Zoom = TRK_zoom.Value;
-            Zoomlevel.Value = Convert.ToDecimal(MainMap.Zoom);
         }
 
         /// <summary>
@@ -6666,30 +6655,12 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
         }
 
-        public void TRK_zoom_Scroll(object sender, EventArgs e)
-        {
-            try
-            {
-                lock (thisLock)
-                {
-                    MainMap.Zoom = TRK_zoom.Value;
-                    Zoomlevel.Value = Convert.ToDecimal(TRK_zoom.Value);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-            }
-        }
-
         private void Zoomlevel_ValueChanged(object sender, EventArgs e)
         {
             try
             {
                 lock (thisLock)
                 {
-                    MainMap.Zoom = (double)Zoomlevel.Value;
-                    TRK_zoom.Value = (float)Zoomlevel.Value;
                 }
             }
             catch (Exception ex)
@@ -7727,8 +7698,6 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 try
                 {
-                    TRK_zoom.Value = (float)(MainMap.Zoom);
-                    Zoomlevel.Value = Convert.ToDecimal(MainMap.Zoom);
                 }
                 catch (Exception ex)
                 {
@@ -8236,6 +8205,22 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             results += Environment.NewLine + Environment.NewLine + count + " tile" + (count > 1 ? "s" : "") + " loaded !";
             CustomMessageBox.Show("Number of tiles loaded per zoom : " + Environment.NewLine + results, "Injecting Custom Map Results");
             map.Dispose();
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void GridBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NewPanel_Paint(object sender, PaintEventArgs e)
+        {
+            Button helloButton = new Button();
+            helloButton.BackColor = Color.LightGray;
         }
     }
 }
