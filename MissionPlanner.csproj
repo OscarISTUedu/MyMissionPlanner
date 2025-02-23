@@ -982,6 +982,9 @@
     <None Update="NoFly\SouthAfricaNoRPASOutlined.kmz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\GridImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Scripts\datetime.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1177,6 +1180,9 @@
 
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\01_01.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="SikRadio\ISikRadioForm.cs" />
     <Compile Include="SikRadio\RFD900.cs" />
     <Compile Include="SikRadio\RFDLib\Array.cs" />
@@ -1189,5 +1195,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="plugins\example23-switch.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\01_01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
