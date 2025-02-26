@@ -4878,17 +4878,6 @@ namespace MissionPlanner.GCSViews
                 }
             }
 
-            e.Graphics.ResetTransform();
-
-            polyicon.Location = new Point(10, 100);
-            polyicon.Paint(e.Graphics);
-
-            e.Graphics.ResetTransform();
-
-            zoomicon.Location = new Point(10, polyicon.Location.Y + polyicon.Height + 5);
-            zoomicon.Paint(e.Graphics);
-
-            e.Graphics.ResetTransform();
         }
 
         private void MainMap_Resize(object sender, EventArgs e)
@@ -7278,7 +7267,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 isMouseDown = false;
             }
         }
-
+        //
         private void MainMap_MouseUp(object sender, MouseEventArgs e)
         {
             if (isMouseClickOffMenu)
@@ -7288,7 +7277,8 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
 
             // check if the mouse up happend over our button
-            if (polyicon.Rectangle.Contains(e.Location))
+            /*
+            if (polyicon.Rectangle.Contains(e.Location))//Polygon btn functionality
             {
                 if (e.Button == MouseButtons.Right)
                 {
@@ -7300,16 +7290,16 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     return;
                 }
 
-                contextMenuStripPoly.Show(MainMap, e.Location);
+                contextMenuStripPoly.Show(ToolPanel, e.Location);
                 return;
             }
 
-            if (zoomicon.Rectangle.Contains(e.Location))
+            if (zoomicon.Rectangle.Contains(e.Location))//Zomm btn functionality
             {
-                contextMenuStripZoom.Show(MainMap, e.Location);
+                contextMenuStripZoom.Show(ToolPanel, e.Location);
                 return;
             }
-
+            */
             MouseDownEnd = MainMap.FromLocalToLatLng(e.X, e.Y);
 
             // Console.WriteLine("MainMap MU");
@@ -7499,7 +7489,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
             isMouseDraging = false;
         }
-
+        //
         private void ReCalcFence(int rowno, bool insert, bool delete)
         {
             if (insert)
@@ -8214,13 +8204,35 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void GridBtn_Click(object sender, EventArgs e)
         {
-
+            GridPlugin grid = new GridPlugin();
+            grid.Host = new PluginHost();
+            grid.but_Click(sender, e);
         }
 
-        private void NewPanel_Paint(object sender, PaintEventArgs e)
+        private void ToolPanel_Paint(object sender, PaintEventArgs e)
         {
-            Button helloButton = new Button();
-            helloButton.BackColor = Color.LightGray;
+            /*
+            e.Graphics.ResetTransform();
+
+            polyicon.Location = new Point(10, 60);
+            polyicon.Paint(e.Graphics);
+
+            e.Graphics.ResetTransform();
+
+            zoomicon.Location = new Point(10, polyicon.Location.Y + polyicon.Height + 5);
+            zoomicon.Paint(e.Graphics);
+
+            e.Graphics.ResetTransform();
+            */
+        }
+
+        private void PolygonBtn_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn!=null)
+            {
+                contextMenuStripPoly.Show(ToolPanel, btn.Location);
+            }    
         }
     }
 }

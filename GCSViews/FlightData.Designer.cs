@@ -49,6 +49,7 @@ namespace MissionPlanner.GCSViews
             this.tabActions = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.BUT_SendMSG = new MissionPlanner.Controls.MyButton();
+            this.GridBtn = new MissionPlanner.Controls.MyButton();
             this.BUT_abortland = new MissionPlanner.Controls.MyButton();
             this.modifyandSetLoiterRad = new MissionPlanner.Controls.ModifyandSet();
             this.BUT_clear_track = new MissionPlanner.Controls.MyButton();
@@ -240,6 +241,7 @@ namespace MissionPlanner.GCSViews
             this.scriptChecker = new System.Windows.Forms.Timer(this.components);
             this.Messagetabtimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
+            this.ToolPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.MainH)).BeginInit();
             this.MainH.Panel1.SuspendLayout();
             this.MainH.Panel2.SuspendLayout();
@@ -296,6 +298,7 @@ namespace MissionPlanner.GCSViews
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).BeginInit();
             this.SuspendLayout();
+            this.ToolPanel.SuspendLayout();
             // 
             // MainH
             // 
@@ -2896,6 +2899,17 @@ namespace MissionPlanner.GCSViews
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
+            // GridBtn
+            // 
+            this.GridBtn.BackColor = System.Drawing.Color.LightGray;
+            this.GridBtn.ForeColor = System.Drawing.Color.Red;
+            this.GridBtn.Location = new System.Drawing.Point(30, 30);
+            this.GridBtn.Text = "Привет";
+            // 
+            // ToolPanel
+            // 
+            ToolPanel.Controls.Add(GridBtn);
+            // 
             // FlightData
             // 
             this.Controls.Add(this.MainH);
@@ -3000,6 +3014,7 @@ namespace MissionPlanner.GCSViews
         private AGaugeApp.AGauge Gvspeed;
         private System.Windows.Forms.TableLayoutPanel tableMap;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel ToolPanel;
         private System.Windows.Forms.NumericUpDown Zoomlevel;
         private Label label1;
         private System.Windows.Forms.CheckBox CHK_autopan;
@@ -3210,5 +3225,6 @@ namespace MissionPlanner.GCSViews
         private ToolStripMenuItem gimbalVideoFullSizedToolStripMenuItem;
         private ToolStripMenuItem gimbalVideoMiniToolStripMenuItem;
         private ToolStripMenuItem gimbalVideoPopOutToolStripMenuItem;
+        private Controls.MyButton GridBtn;
     }
 }
