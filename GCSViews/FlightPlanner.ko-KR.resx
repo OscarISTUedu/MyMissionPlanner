@@ -2259,7 +2259,7 @@
     <value>test</value>
   </data>
   <data name="contextMenuStripZoom.TrayLocation" type="System.Drawing.Point, System.Drawing">
-    <value>528, 17</value>
+    <value>528, 500</value>
   </data>
   <data name="zoomToVehicleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
