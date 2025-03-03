@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MissionPlanner
 {
@@ -53,6 +54,7 @@ namespace MissionPlanner
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.status1 = new MissionPlanner.Controls.Status();
+            this.topMenu = new System.Windows.Forms.MainMenu();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -201,6 +203,45 @@ namespace MissionPlanner
             this.status1.Name = "status1";
             this.status1.Percent = 0D;
             // 
+            // topMenu
+            // 
+            this.topMenu.MenuItems.Add("Проект", new MenuItem[] {
+            new MenuItem("Новый проект"),
+            new MenuItem("Мои проекты"),
+            new MenuItem("Экспортировать"),
+            new MenuItem("Импортировать"),
+            new MenuItem("Создать"),
+            new MenuItem("Открыть"),
+            new MenuItem("Выход")
+            });
+            this.topMenu.MenuItems.Add("Редактирование", new MenuItem[] {
+            new MenuItem("Создать переплёт"),
+            new MenuItem("Создать площадную аэрофотосъемку"),
+            new MenuItem("Создать точку ожидания"),
+            });
+            this.topMenu.MenuItems.Add("Вид", new MenuItem[] {
+            new MenuItem("Спрятать маршрут"),
+            });
+            this.topMenu.MenuItems.Add("Инструемнты", new MenuItem[] {
+            new MenuItem("Инструменты измерений"),
+            new MenuItem("Создать сетку"),
+            });
+            this.topMenu.MenuItems.Add("Полёт", new MenuItem[] {
+            new MenuItem("Подключить БВС"),
+            new MenuItem("Файл привязки"),
+            new MenuItem("Постобработка геодезических наблюдений"),
+            });
+            this.topMenu.MenuItems.Add("Настройки", new MenuItem[] {
+            new MenuItem("Режим"),
+            new MenuItem("Окна"),
+            new MenuItem("Системы координат"),
+            new MenuItem("Покрытие"),
+            new MenuItem("Параметры"),
+            });
+            //this.topMenu.MenuItems.Add("Полёт");
+            //this.topMenu.MenuItems.Add("Настройки");
+            this.Menu = topMenu;
+            //
             // MainV2
             // 
             resources.ApplyResources(this, "$this");
@@ -217,6 +258,7 @@ namespace MissionPlanner
             this.CTX_mainmenu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -239,5 +281,7 @@ namespace MissionPlanner
         private System.Windows.Forms.ToolStripMenuItem connectionOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionListToolStripMenuItem;
         public Controls.Status status1;
+        public System.Windows.Forms.MainMenu topMenu;
+
     }
 }
