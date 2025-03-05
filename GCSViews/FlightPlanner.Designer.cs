@@ -65,6 +65,14 @@ namespace MissionPlanner.GCSViews
             this.BUT_write = new MissionPlanner.Controls.MyButton();
             this.BUT_read = new MissionPlanner.Controls.MyButton();
             this.GridBtn = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.TXT_homealt = new System.Windows.Forms.TextBox();
+            this.TXT_homelng = new System.Windows.Forms.TextBox();
+            this.TXT_homelat = new System.Windows.Forms.TextBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.label6 = new System.Windows.Forms.Label();
@@ -110,8 +118,15 @@ namespace MissionPlanner.GCSViews
             this.chk_grid = new System.Windows.Forms.CheckBox();
             this.comboBoxMapType = new System.Windows.Forms.ComboBox();
             this.lnk_kml = new System.Windows.Forms.LinkLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_wpfile = new System.Windows.Forms.Label();
+            this.BUT_loadwpfile = new MissionPlanner.Controls.MyButton();
+            this.BUT_saveWPFile = new MissionPlanner.Controls.MyButton();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panelMap = new System.Windows.Forms.Panel();
+            this.ProjectOptionsSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             this.cmb_missiontype = new System.Windows.Forms.ComboBox();
             this.ToolPanel = new System.Windows.Forms.Panel();
             this.PolygonBtn = new System.Windows.Forms.Button();
@@ -212,26 +227,25 @@ namespace MissionPlanner.GCSViews
             this.zoomToVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToMissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToHomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ProjectOptionsSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.treeView2 = new System.Windows.Forms.TreeView();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel5.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelWaypoints.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).BeginInit();
             this.panelAction.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panelMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ProjectOptionsSplitContainer)).BeginInit();
+            this.ProjectOptionsSplitContainer.Panel1.SuspendLayout();
+            this.ProjectOptionsSplitContainer.Panel2.SuspendLayout();
+            this.ProjectOptionsSplitContainer.SuspendLayout();
             this.ToolPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panelBASE.SuspendLayout();
             this.contextMenuStripPoly.SuspendLayout();
             this.contextMenuStripZoom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ProjectOptionsSplitContainer)).BeginInit();
-            this.ProjectOptionsSplitContainer.Panel1.SuspendLayout();
-            this.ProjectOptionsSplitContainer.Panel2.SuspendLayout();
-            this.ProjectOptionsSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // CHK_verifyheight
@@ -314,6 +328,58 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.GridBtn, "GridBtn");
             this.GridBtn.Name = "GridBtn";
             this.GridBtn.Click += new System.EventHandler(this.GridBtn_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.Label1);
+            this.panel1.Controls.Add(this.TXT_homealt);
+            this.panel1.Controls.Add(this.TXT_homelng);
+            this.panel1.Controls.Add(this.TXT_homelat);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            this.label4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.label4_LinkClicked);
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // Label1
+            // 
+            resources.ApplyResources(this.Label1, "Label1");
+            this.Label1.Name = "Label1";
+            // 
+            // TXT_homealt
+            // 
+            resources.ApplyResources(this.TXT_homealt, "TXT_homealt");
+            this.TXT_homealt.Name = "TXT_homealt";
+            this.TXT_homealt.TextChanged += new System.EventHandler(this.TXT_homealt_TextChanged);
+            // 
+            // TXT_homelng
+            // 
+            resources.ApplyResources(this.TXT_homelng, "TXT_homelng");
+            this.TXT_homelng.Name = "TXT_homelng";
+            this.TXT_homelng.TextChanged += new System.EventHandler(this.TXT_homelng_TextChanged);
+            // 
+            // TXT_homelat
+            // 
+            resources.ApplyResources(this.TXT_homelat, "TXT_homelat");
+            this.TXT_homelat.Name = "TXT_homelat";
+            this.TXT_homelat.TextChanged += new System.EventHandler(this.TXT_homelat_TextChanged);
+            this.TXT_homelat.Enter += new System.EventHandler(this.TXT_homelat_Enter);
             // 
             // dataGridViewImageColumn1
             // 
@@ -627,6 +693,8 @@ namespace MissionPlanner.GCSViews
             // 
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -684,6 +752,36 @@ namespace MissionPlanner.GCSViews
             this.lnk_kml.TabStop = true;
             this.lnk_kml.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_kml_LinkClicked);
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lbl_wpfile);
+            this.panel2.Controls.Add(this.BUT_loadwpfile);
+            this.panel2.Controls.Add(this.BUT_saveWPFile);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_wpfile
+            // 
+            resources.ApplyResources(this.lbl_wpfile, "lbl_wpfile");
+            this.lbl_wpfile.Name = "lbl_wpfile";
+            // 
+            // BUT_loadwpfile
+            // 
+            resources.ApplyResources(this.BUT_loadwpfile, "BUT_loadwpfile");
+            this.BUT_loadwpfile.Name = "BUT_loadwpfile";
+            this.BUT_loadwpfile.TextColorNotEnabled = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
+            this.BUT_loadwpfile.UseVisualStyleBackColor = true;
+            this.BUT_loadwpfile.Click += new System.EventHandler(this.BUT_loadwpfile_Click);
+            // 
+            // BUT_saveWPFile
+            // 
+            resources.ApplyResources(this.BUT_saveWPFile, "BUT_saveWPFile");
+            this.BUT_saveWPFile.Name = "BUT_saveWPFile";
+            this.BUT_saveWPFile.TextColorNotEnabled = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(87)))), ((int)(((byte)(4)))));
+            this.BUT_saveWPFile.UseVisualStyleBackColor = true;
+            this.BUT_saveWPFile.Click += new System.EventHandler(this.BUT_saveWPFile_Click);
+            // 
             // splitter2
             // 
             resources.ApplyResources(this.splitter2, "splitter2");
@@ -703,6 +801,29 @@ namespace MissionPlanner.GCSViews
             this.panelMap.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelMap.Name = "panelMap";
             this.panelMap.Resize += new System.EventHandler(this.panelMap_Resize);
+            // 
+            // ProjectOptionsSplitContainer
+            // 
+            resources.ApplyResources(this.ProjectOptionsSplitContainer, "ProjectOptionsSplitContainer");
+            this.ProjectOptionsSplitContainer.Name = "ProjectOptionsSplitContainer";
+            // 
+            // ProjectOptionsSplitContainer.Panel1
+            // 
+            this.ProjectOptionsSplitContainer.Panel1.Controls.Add(this.treeView1);
+            // 
+            // ProjectOptionsSplitContainer.Panel2
+            // 
+            this.ProjectOptionsSplitContainer.Panel2.Controls.Add(this.treeView2);
+            // 
+            // treeView1
+            // 
+            resources.ApplyResources(this.treeView1, "treeView1");
+            this.treeView1.Name = "treeView1";
+            // 
+            // treeView2
+            // 
+            resources.ApplyResources(this.treeView2, "treeView2");
+            this.treeView2.Name = "treeView2";
             // 
             // cmb_missiontype
             // 
@@ -1424,29 +1545,6 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.zoomToHomeToolStripMenuItem, "zoomToHomeToolStripMenuItem");
             this.zoomToHomeToolStripMenuItem.Click += new System.EventHandler(this.zoomToHomeToolStripMenuItem_Click);
             // 
-            // ProjectOptionsSplitContainer
-            // 
-            resources.ApplyResources(this.ProjectOptionsSplitContainer, "ProjectOptionsSplitContainer");
-            this.ProjectOptionsSplitContainer.Name = "ProjectOptionsSplitContainer";
-            // 
-            // ProjectOptionsSplitContainer.Panel1
-            // 
-            this.ProjectOptionsSplitContainer.Panel1.Controls.Add(this.treeView1);
-            // 
-            // ProjectOptionsSplitContainer.Panel2
-            // 
-            this.ProjectOptionsSplitContainer.Panel2.Controls.Add(this.treeView2);
-            // 
-            // treeView2
-            // 
-            resources.ApplyResources(this.treeView2, "treeView2");
-            this.treeView2.Name = "treeView2";
-            // 
-            // treeView1
-            // 
-            resources.ApplyResources(this.treeView1, "treeView1");
-            this.treeView1.Name = "treeView1";
-            // 
             // FlightPlanner
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -1457,6 +1555,8 @@ namespace MissionPlanner.GCSViews
             this.Load += new System.EventHandler(this.FlightPlanner_Load);
             this.Resize += new System.EventHandler(this.Planner_Resize);
             this.panel5.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panelWaypoints.ResumeLayout(false);
             this.panelWaypoints.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).EndInit();
@@ -1465,17 +1565,18 @@ namespace MissionPlanner.GCSViews
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.panelMap.ResumeLayout(false);
             this.panelMap.PerformLayout();
+            this.ProjectOptionsSplitContainer.Panel1.ResumeLayout(false);
+            this.ProjectOptionsSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ProjectOptionsSplitContainer)).EndInit();
+            this.ProjectOptionsSplitContainer.ResumeLayout(false);
             this.ToolPanel.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panelBASE.ResumeLayout(false);
             this.contextMenuStripPoly.ResumeLayout(false);
             this.contextMenuStripZoom.ResumeLayout(false);
-            this.ProjectOptionsSplitContainer.Panel1.ResumeLayout(false);
-            this.ProjectOptionsSplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ProjectOptionsSplitContainer)).EndInit();
-            this.ProjectOptionsSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1496,6 +1597,14 @@ namespace MissionPlanner.GCSViews
         public Button GridBtn;
         public MyButton BUT_write;
         public Panel panel5;
+        public Panel panel1;
+        public LinkLabel label4;
+        public Label label3;
+        public Label label2;
+        public Label Label1;
+        public TextBox TXT_homealt;
+        public TextBox TXT_homelng;
+        public TextBox TXT_homelat;
         public DataGridViewImageColumn dataGridViewImageColumn1;
         public DataGridViewImageColumn dataGridViewImageColumn2;
         public Label label6;
@@ -1559,6 +1668,9 @@ namespace MissionPlanner.GCSViews
         public ToolStripMenuItem enterUTMCoordToolStripMenuItem;
         public ToolStripMenuItem loadSHPFileToolStripMenuItem;
         public Coords coords1;
+        public MyButton BUT_loadwpfile;
+        public MyButton BUT_saveWPFile;
+        public Panel panel2;
         public Panel panel4;
         public Panel panel3;
         public FlowLayoutPanel flowLayoutPanel1;
@@ -1566,6 +1678,7 @@ namespace MissionPlanner.GCSViews
         public Splitter splitter2;
         public ToolStripMenuItem insertSplineWPToolStripMenuItem;
         public ToolStripMenuItem fromSHPToolStripMenuItem;
+        public Label lbl_wpfile;
         public ToolStripMenuItem areaToolStripMenuItem;
         public ToolStripMenuItem setHomeHereToolStripMenuItem;
         public ToolStripMenuItem currentPositionToolStripMenuItem;
