@@ -4880,11 +4880,6 @@ namespace MissionPlanner.GCSViews
 
         }
 
-        private void MainMap_Resize(object sender, EventArgs e)
-        {
-            MainMap.Zoom = MainMap.Zoom + 0.01;
-        }
-
         public void modifyAltToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string altdif = "0";
@@ -8226,7 +8221,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             Button btn = sender as Button;
             if (btn!=null)
             {
-                contextMenuStripPoly.Show(ToolPanel, btn.Location);
+                contextMenuStripPoly.Show(GridPolygonToolPanel, btn.Location);
             }    
         }
     }

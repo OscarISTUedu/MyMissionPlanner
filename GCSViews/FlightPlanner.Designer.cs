@@ -104,8 +104,11 @@ namespace MissionPlanner.GCSViews
             this.panelMap = new System.Windows.Forms.Panel();
             this.ProjectOptionsSplitContainer = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.OptionsTabControl = new System.Windows.Forms.TabControl();
+            this.SettingsTabPage = new System.Windows.Forms.TabPage();
+            this.RouteTabPage = new System.Windows.Forms.TabPage();
             this.cmb_missiontype = new System.Windows.Forms.ComboBox();
-            this.ToolPanel = new System.Windows.Forms.Panel();
+            this.GridPolygonToolPanel = new System.Windows.Forms.Panel();
             this.PolygonBtn = new System.Windows.Forms.Button();
             this.lbl_homedist = new System.Windows.Forms.Label();
             this.lbl_prevdist = new System.Windows.Forms.Label();
@@ -204,9 +207,7 @@ namespace MissionPlanner.GCSViews
             this.zoomToVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToMissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToHomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OptionsTabControl = new System.Windows.Forms.TabControl();
-            this.SettingsTabPage = new System.Windows.Forms.TabPage();
-            this.RouteTabPage = new System.Windows.Forms.TabPage();
+            this.MapAndLeftMenuSplitContainer = new System.Windows.Forms.SplitContainer();
             this.Commands = new MissionPlanner.Controls.MyDataGridView();
             this.Command = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Param1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -242,12 +243,16 @@ namespace MissionPlanner.GCSViews
             this.ProjectOptionsSplitContainer.Panel1.SuspendLayout();
             this.ProjectOptionsSplitContainer.Panel2.SuspendLayout();
             this.ProjectOptionsSplitContainer.SuspendLayout();
-            this.ToolPanel.SuspendLayout();
+            this.OptionsTabControl.SuspendLayout();
+            this.GridPolygonToolPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panelBASE.SuspendLayout();
             this.contextMenuStripPoly.SuspendLayout();
             this.contextMenuStripZoom.SuspendLayout();
-            this.OptionsTabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MapAndLeftMenuSplitContainer)).BeginInit();
+            this.MapAndLeftMenuSplitContainer.Panel1.SuspendLayout();
+            this.MapAndLeftMenuSplitContainer.Panel2.SuspendLayout();
+            this.MapAndLeftMenuSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).BeginInit();
             this.SuspendLayout();
             // 
@@ -606,13 +611,12 @@ namespace MissionPlanner.GCSViews
             // 
             // panelMap
             // 
-            this.panelMap.Controls.Add(this.ProjectOptionsSplitContainer);
+            this.panelMap.Controls.Add(this.MapAndLeftMenuSplitContainer);
             this.panelMap.Controls.Add(this.cmb_missiontype);
-            this.panelMap.Controls.Add(this.ToolPanel);
+            this.panelMap.Controls.Add(this.GridPolygonToolPanel);
             this.panelMap.Controls.Add(this.lbl_homedist);
             this.panelMap.Controls.Add(this.lbl_prevdist);
             this.panelMap.Controls.Add(this.lbl_distance);
-            this.panelMap.Controls.Add(this.MainMap);
             resources.ApplyResources(this.panelMap, "panelMap");
             this.panelMap.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelMap.Name = "panelMap";
@@ -636,6 +640,26 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.treeView1, "treeView1");
             this.treeView1.Name = "treeView1";
             // 
+            // OptionsTabControl
+            // 
+            this.OptionsTabControl.Controls.Add(this.SettingsTabPage);
+            this.OptionsTabControl.Controls.Add(this.RouteTabPage);
+            resources.ApplyResources(this.OptionsTabControl, "OptionsTabControl");
+            this.OptionsTabControl.Name = "OptionsTabControl";
+            this.OptionsTabControl.SelectedIndex = 0;
+            // 
+            // SettingsTabPage
+            // 
+            resources.ApplyResources(this.SettingsTabPage, "SettingsTabPage");
+            this.SettingsTabPage.Name = "SettingsTabPage";
+            this.SettingsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // RouteTabPage
+            // 
+            resources.ApplyResources(this.RouteTabPage, "RouteTabPage");
+            this.RouteTabPage.Name = "RouteTabPage";
+            this.RouteTabPage.UseVisualStyleBackColor = true;
+            // 
             // cmb_missiontype
             // 
             resources.ApplyResources(this.cmb_missiontype, "cmb_missiontype");
@@ -647,15 +671,15 @@ namespace MissionPlanner.GCSViews
             this.cmb_missiontype.Name = "cmb_missiontype";
             this.cmb_missiontype.SelectedIndexChanged += new System.EventHandler(this.Cmb_missiontype_SelectedIndexChanged);
             // 
-            // ToolPanel
+            // GridPolygonToolPanel
             // 
-            this.ToolPanel.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.ToolPanel, "ToolPanel");
-            this.ToolPanel.Controls.Add(this.PolygonBtn);
-            this.ToolPanel.Controls.Add(this.GridBtn);
-            this.ToolPanel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ToolPanel.Name = "ToolPanel";
-            this.ToolPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolPanel_Paint);
+            this.GridPolygonToolPanel.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.GridPolygonToolPanel, "GridPolygonToolPanel");
+            this.GridPolygonToolPanel.Controls.Add(this.PolygonBtn);
+            this.GridPolygonToolPanel.Controls.Add(this.GridBtn);
+            this.GridPolygonToolPanel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.GridPolygonToolPanel.Name = "GridPolygonToolPanel";
+            this.GridPolygonToolPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolPanel_Paint);
             // 
             // PolygonBtn
             // 
@@ -1356,25 +1380,18 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.zoomToHomeToolStripMenuItem, "zoomToHomeToolStripMenuItem");
             this.zoomToHomeToolStripMenuItem.Click += new System.EventHandler(this.zoomToHomeToolStripMenuItem_Click);
             // 
-            // OptionsTabControl
+            // MapAndLeftMenuSplitContainer
             // 
-            this.OptionsTabControl.Controls.Add(this.SettingsTabPage);
-            this.OptionsTabControl.Controls.Add(this.RouteTabPage);
-            resources.ApplyResources(this.OptionsTabControl, "OptionsTabControl");
-            this.OptionsTabControl.Name = "OptionsTabControl";
-            this.OptionsTabControl.SelectedIndex = 0;
+            resources.ApplyResources(this.MapAndLeftMenuSplitContainer, "MapAndLeftMenuSplitContainer");
+            this.MapAndLeftMenuSplitContainer.Name = "MapAndLeftMenuSplitContainer";
             // 
-            // SettingsTabPage
+            // MapAndLeftMenuSplitContainer.Panel1
             // 
-            resources.ApplyResources(this.SettingsTabPage, "SettingsTabPage");
-            this.SettingsTabPage.Name = "SettingsTabPage";
-            this.SettingsTabPage.UseVisualStyleBackColor = true;
+            this.MapAndLeftMenuSplitContainer.Panel1.Controls.Add(this.ProjectOptionsSplitContainer);
             // 
-            // RouteTabPage
+            // MapAndLeftMenuSplitContainer.Panel2
             // 
-            resources.ApplyResources(this.RouteTabPage, "RouteTabPage");
-            this.RouteTabPage.Name = "RouteTabPage";
-            this.RouteTabPage.UseVisualStyleBackColor = true;
+            this.MapAndLeftMenuSplitContainer.Panel2.Controls.Add(this.MainMap);
             // 
             // Commands
             // 
@@ -1589,12 +1606,16 @@ namespace MissionPlanner.GCSViews
             this.ProjectOptionsSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ProjectOptionsSplitContainer)).EndInit();
             this.ProjectOptionsSplitContainer.ResumeLayout(false);
-            this.ToolPanel.ResumeLayout(false);
+            this.OptionsTabControl.ResumeLayout(false);
+            this.GridPolygonToolPanel.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panelBASE.ResumeLayout(false);
             this.contextMenuStripPoly.ResumeLayout(false);
             this.contextMenuStripZoom.ResumeLayout(false);
-            this.OptionsTabControl.ResumeLayout(false);
+            this.MapAndLeftMenuSplitContainer.Panel1.ResumeLayout(false);
+            this.MapAndLeftMenuSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MapAndLeftMenuSplitContainer)).EndInit();
+            this.MapAndLeftMenuSplitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).EndInit();
             this.ResumeLayout(false);
 
@@ -1771,12 +1792,13 @@ namespace MissionPlanner.GCSViews
         private ToolStripMenuItem gDALOpacityToolStripMenuItem;
         private MyButton BUT_InjectCustomMap;
         private ProgressBar progressBarInjectCustomMap;
-        private Panel ToolPanel;
+        private Panel GridPolygonToolPanel;
         public Button PolygonBtn;
         private SplitContainer ProjectOptionsSplitContainer;
         private TreeView treeView1;
         private TabControl OptionsTabControl;
         private TabPage SettingsTabPage;
         private TabPage RouteTabPage;
+        private SplitContainer MapAndLeftMenuSplitContainer;
     }
 }
