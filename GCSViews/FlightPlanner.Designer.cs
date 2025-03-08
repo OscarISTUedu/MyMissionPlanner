@@ -204,10 +204,10 @@ namespace MissionPlanner.GCSViews
             this.enterUTMCoordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.switchDockingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setHomeHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmb_missiontype = new System.Windows.Forms.ComboBox();
             this.lbl_prevdist = new System.Windows.Forms.Label();
             this.lbl_distance = new System.Windows.Forms.Label();
             this.lbl_homedist = new System.Windows.Forms.Label();
+            this.cmb_missiontype = new System.Windows.Forms.ComboBox();
             this.GridPolygonToolPanel = new System.Windows.Forms.Panel();
             this.PolygonBtn = new System.Windows.Forms.Button();
             this.addPolygonPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -249,6 +249,7 @@ namespace MissionPlanner.GCSViews
             this.ProjectOptionsSplitContainer.Panel2.SuspendLayout();
             this.ProjectOptionsSplitContainer.SuspendLayout();
             this.OptionsTabControl.SuspendLayout();
+            this.RouteTabPage.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.GridPolygonToolPanel.SuspendLayout();
             this.panelBASE.SuspendLayout();
@@ -441,7 +442,6 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.Controls.Add(this.label5);
             this.panelWaypoints.Controls.Add(this.TXT_loiterrad);
             this.panelWaypoints.Controls.Add(this.LBL_defalutalt);
-            this.panelWaypoints.Controls.Add(this.Commands);
             this.panelWaypoints.Controls.Add(this.TXT_DefaultAlt);
             this.panelWaypoints.Controls.Add(this.CHK_verifyheight);
             this.panelWaypoints.Controls.Add(this.TXT_WPRad);
@@ -492,7 +492,6 @@ namespace MissionPlanner.GCSViews
             // Commands
             // 
             this.Commands.AllowUserToAddRows = false;
-            resources.ApplyResources(this.Commands, "Commands");
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -501,6 +500,7 @@ namespace MissionPlanner.GCSViews
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.Commands.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.Commands, "Commands");
             this.Commands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Command,
             this.Param1,
@@ -856,6 +856,7 @@ namespace MissionPlanner.GCSViews
             // 
             // RouteTabPage
             // 
+            this.RouteTabPage.Controls.Add(this.Commands);
             resources.ApplyResources(this.RouteTabPage, "RouteTabPage");
             this.RouteTabPage.Name = "RouteTabPage";
             this.RouteTabPage.UseVisualStyleBackColor = true;
@@ -1401,6 +1402,21 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.setHomeHereToolStripMenuItem, "setHomeHereToolStripMenuItem");
             this.setHomeHereToolStripMenuItem.Click += new System.EventHandler(this.setHomeHereToolStripMenuItem_Click);
             // 
+            // lbl_prevdist
+            // 
+            resources.ApplyResources(this.lbl_prevdist, "lbl_prevdist");
+            this.lbl_prevdist.Name = "lbl_prevdist";
+            // 
+            // lbl_distance
+            // 
+            resources.ApplyResources(this.lbl_distance, "lbl_distance");
+            this.lbl_distance.Name = "lbl_distance";
+            // 
+            // lbl_homedist
+            // 
+            resources.ApplyResources(this.lbl_homedist, "lbl_homedist");
+            this.lbl_homedist.Name = "lbl_homedist";
+            // 
             // cmb_missiontype
             // 
             resources.ApplyResources(this.cmb_missiontype, "cmb_missiontype");
@@ -1411,24 +1427,6 @@ namespace MissionPlanner.GCSViews
             resources.GetString("cmb_missiontype.Items2")});
             this.cmb_missiontype.Name = "cmb_missiontype";
             this.cmb_missiontype.SelectedIndexChanged += new System.EventHandler(this.Cmb_missiontype_SelectedIndexChanged);
-            // 
-            // lbl_prevdist
-            // 
-            this.lbl_prevdist.BringToFront();
-            resources.ApplyResources(this.lbl_prevdist, "lbl_prevdist");
-            this.lbl_prevdist.Name = "lbl_prevdist";
-            // 
-            // lbl_distance
-            // 
-            this.lbl_distance.BringToFront();
-            resources.ApplyResources(this.lbl_distance, "lbl_distance");
-            this.lbl_distance.Name = "lbl_distance";
-            // 
-            // lbl_homedist
-            // 
-            this.lbl_homedist.BringToFront();
-            resources.ApplyResources(this.lbl_homedist, "lbl_homedist");
-            this.lbl_homedist.Name = "lbl_homedist";
             // 
             // GridPolygonToolPanel
             // 
@@ -1615,6 +1613,7 @@ namespace MissionPlanner.GCSViews
             ((System.ComponentModel.ISupportInitialize)(this.ProjectOptionsSplitContainer)).EndInit();
             this.ProjectOptionsSplitContainer.ResumeLayout(false);
             this.OptionsTabControl.ResumeLayout(false);
+            this.RouteTabPage.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.GridPolygonToolPanel.ResumeLayout(false);
             this.panelBASE.ResumeLayout(false);
