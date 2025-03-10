@@ -225,6 +225,9 @@
   <data name="BUT_loadwpfile.Text" xml:space="preserve">
     <value>Загрузить WP-файл</value>
   </data>
+	<data name="BUT_saveWPFile.Text" xml:space="preserve">
+    <value>Сохранить WP-файл</value>
+  </data>
   <data name="Up.ToolTipText" xml:space="preserve">
     <value>Сдвинуть строку вверх</value>
   </data>
