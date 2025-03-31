@@ -29,19 +29,19 @@ namespace MissionPlanner.Grid
 {
     public partial class GridUI : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        public static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         // Variables
         const double rad2deg = (180 / Math.PI);
         const double deg2rad = (1.0 / rad2deg);
 
-        private GridPlugin plugin;
+        public GridPlugin plugin;
         static public Object thisLock = new Object();
 
         GMapOverlay routesOverlay;
         GMapOverlay kmlpolygonsoverlay;
-        List<PointLatLngAlt> list = new List<PointLatLngAlt>();
-        List<PointLatLngAlt> grid;
+        public List<PointLatLngAlt> list = new List<PointLatLngAlt>();
+        public List<PointLatLngAlt> grid;
         bool loadedfromfile = false;
         bool loading = false;
 
@@ -83,15 +83,18 @@ namespace MissionPlanner.Grid
             map.Overlays.Add(routesOverlay);
 
             // Map Events
+            
             map.OnMapZoomChanged += new MapZoomChanged(map_OnMapZoomChanged);
             map.OnMarkerEnter += new MarkerEnter(map_OnMarkerEnter);
             map.OnMarkerLeave += new MarkerLeave(map_OnMarkerLeave);
             map.MouseUp += new MouseEventHandler(map_MouseUp);
 
+           
             map.OnRouteEnter += new RouteEnter(map_OnRouteEnter);
             map.OnRouteLeave += new RouteLeave(map_OnRouteLeave);
+            
 
-            var points = plugin.Host.FPDrawnPolygon;
+            var points = plugin.Host.FPDrawnPolygon;//Red waypoints
             points.Points.ForEach(x => { list.Add(x); });
             points.Dispose();
             if (plugin.Host.config["distunits"] != null)
@@ -124,9 +127,11 @@ namespace MissionPlanner.Grid
             xmlcamera(false, Settings.GetUserDataDirectory() + "cameras.xml");
 
             loading = false;
+            //CustomMessageBox.Show($"this.grid.Count= {this.grid.Count}\n");
+
         }
 
-        private void GridUI_Load(object sender, EventArgs e)
+        public void GridUI_Load(object sender, EventArgs e)
         {
             loading = true;
             if (!loadedfromfile)
@@ -145,7 +150,7 @@ namespace MissionPlanner.Grid
             domainUpDown1_ValueChanged(this, null);
         }
 
-        private void GridUI_Resize(object sender, EventArgs e)
+        public void GridUI_Resize(object sender, EventArgs e)
         {
             map.ZoomAndCenterMarkers("polygons");
         }
@@ -260,7 +265,7 @@ namespace MissionPlanner.Grid
             loadedfromfile = true;
         }
 
-        GridData savegriddata()
+        public GridData savegriddata()
         {
             GridData griddata = new GridData();
 
@@ -406,7 +411,7 @@ namespace MissionPlanner.Grid
             catch { }
         }
 
-        void savesettings()
+        public void savesettings()
         {
             plugin.Host.config["grid_camera"] = CMB_camera.Text;
             plugin.Host.config["grid_alt"] = NUM_altitude.Value.ToString();
@@ -455,7 +460,7 @@ namespace MissionPlanner.Grid
             plugin.Host.config["grid_match_spiral_perimeter"] = CHK_match_spiral_perimeter.Checked.ToString();
         }
 
-        private void xmlcamera(bool write, string filename)
+        public void xmlcamera(bool write, string filename)
         {
             bool exists = File.Exists(filename);
 
@@ -575,7 +580,7 @@ namespace MissionPlanner.Grid
         }
 
         // Do Work
-        private async void domainUpDown1_ValueChanged(object sender, EventArgs e)
+        public async void domainUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (loading)
                 return;
@@ -880,11 +885,12 @@ namespace MissionPlanner.Grid
                 map.ZoomAndCenterMarkers("routes");
 
             CalcHeadingHold();
+            CustomMessageBox.Show($"Success domainUpDown1_ValueChanged()");
 
             map.Invalidate();
         }
 
-        private void AddWP(double Lng, double Lat, double Alt, string tag, object gridobject = null)
+        public void AddWP(double Lng, double Lat, double Alt, string tag, object gridobject = null)
         {
             if (CHK_copter_headinghold.Checked)
             {
@@ -1052,7 +1058,7 @@ namespace MissionPlanner.Grid
             fovv = viewheight;
         }
 
-        void getFOVangle(ref double fovh, ref double fovv)
+        public void getFOVangle(ref double fovh, ref double fovv)
         {
             double focallen = (double)NUM_focallength.Value;
             double sensorwidth = double.Parse(TXT_senswidth.Text);
@@ -1109,7 +1115,7 @@ namespace MissionPlanner.Grid
             catch { return; }
         }
 
-        private void CalcHeadingHold()
+        public void CalcHeadingHold()
         {
             int previous = (int)Math.Round(Convert.ToDecimal(((UpDownBase)NUM_angle).Text)); //((UpDownBase)sender).Text
             int current = (int)Math.Round(NUM_angle.Value);
@@ -1138,7 +1144,7 @@ namespace MissionPlanner.Grid
         }
 
         // Map Operators
-        private void map_OnRouteEnter(GMapRoute item)
+        public void map_OnRouteEnter(GMapRoute item)
         {
             string dist;
             if (DistUnits == "Feet")
@@ -1164,7 +1170,7 @@ namespace MissionPlanner.Grid
             routesOverlay.Markers.Add(marker);
         }
 
-        private void map_OnRouteLeave(GMapRoute item)
+        public void map_OnRouteLeave(GMapRoute item)
         {
             if (marker != null)
             {
@@ -1177,7 +1183,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void map_OnMarkerLeave(GMapMarker item)
+        public void map_OnMarkerLeave(GMapMarker item)
         {
             if (!isMouseDown)
             {
@@ -1190,7 +1196,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void map_OnMarkerEnter(GMapMarker item)
+        public void map_OnMarkerEnter(GMapMarker item)
         {
             if (!isMouseDown)
             {
@@ -1202,7 +1208,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void map_MouseUp(object sender, MouseEventArgs e)
+        public void map_MouseUp(object sender, MouseEventArgs e)
         {
             MouseDownEnd = map.FromLocalToLatLng(e.X, e.Y);
 
@@ -1234,7 +1240,7 @@ namespace MissionPlanner.Grid
             CurrentGMapMarkerStartPos = null;
         }
 
-        private void map_MouseDown(object sender, MouseEventArgs e)
+        public void map_MouseDown(object sender, MouseEventArgs e)
         {
             MouseDownStart = map.FromLocalToLatLng(e.X, e.Y);
 
@@ -1248,7 +1254,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void map_MouseMove(object sender, MouseEventArgs e)
+        public void map_MouseMove(object sender, MouseEventArgs e)
         {
             PointLatLng point = map.FromLocalToLatLng(e.X, e.Y);
             currentMousePosition = point;
@@ -1299,7 +1305,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void map_OnMapZoomChanged()
+        public void map_OnMapZoomChanged()
         {
             if (map.Zoom > 0)
             {
@@ -1312,7 +1318,7 @@ namespace MissionPlanner.Grid
         }
 
         // Operators
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        public void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -1324,7 +1330,7 @@ namespace MissionPlanner.Grid
             catch { }
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        public void trackBar1_Scroll(object sender, EventArgs e)
         {
             try
             {
@@ -1336,12 +1342,12 @@ namespace MissionPlanner.Grid
             catch { }
         }
 
-        private void NUM_ValueChanged(object sender, EventArgs e)
+        public void NUM_ValueChanged(object sender, EventArgs e)
         {
             domainUpDown1_ValueChanged(null, null);
         }
 
-        private void CMB_camera_SelectedIndexChanged(object sender, EventArgs e)
+        public void CMB_camera_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cameras.ContainsKey(CMB_camera.Text))
             {
@@ -1361,17 +1367,17 @@ namespace MissionPlanner.Grid
             domainUpDown1_ValueChanged(null, null);
         }
 
-        private void TXT_TextChanged(object sender, EventArgs e)
+        public void TXT_TextChanged(object sender, EventArgs e)
         {
             domainUpDown1_ValueChanged(null, null);
         }
 
-        private void CHK_camdirection_CheckedChanged(object sender, EventArgs e)
+        public void CHK_camdirection_CheckedChanged(object sender, EventArgs e)
         {
             domainUpDown1_ValueChanged(null, null);
         }
 
-        private void CHK_advanced_CheckedChanged(object sender, EventArgs e)
+        public void CHK_advanced_CheckedChanged(object sender, EventArgs e)
         {
             if (CHK_advanced.Checked)
             {
@@ -1387,7 +1393,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void CHK_copter_headinghold_CheckedChanged(object sender, EventArgs e)
+        public void CHK_copter_headinghold_CheckedChanged(object sender, EventArgs e)
         {
             if (CHK_copter_headinghold.Checked)
             {
@@ -1406,7 +1412,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void CHK_copter_headingholdlock_CheckedChanged(object sender, EventArgs e)
+        public void CHK_copter_headingholdlock_CheckedChanged(object sender, EventArgs e)
         {
             if (CHK_copter_headingholdlock.Checked)
             {
@@ -1419,7 +1425,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void BUT_headingholdplus_Click(object sender, EventArgs e)
+        public void BUT_headingholdplus_Click(object sender, EventArgs e)
         {
             int previous = Convert.ToInt32(TXT_headinghold.Text);
             if (!CHK_copter_headingholdlock.Checked)
@@ -1446,7 +1452,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void BUT_headingholdminus_Click(object sender, EventArgs e)
+        public void BUT_headingholdminus_Click(object sender, EventArgs e)
         {
             int previous = Convert.ToInt32(TXT_headinghold.Text);
 
@@ -1474,7 +1480,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void BUT_samplephoto_Click(object sender, EventArgs e)
+        public void BUT_samplephoto_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -1564,7 +1570,7 @@ namespace MissionPlanner.Grid
             }
         }
 
-        private void BUT_save_Click(object sender, EventArgs e)
+        public void BUT_save_Click(object sender, EventArgs e)
         {
             camerainfo camera = new camerainfo();
 
@@ -1601,10 +1607,11 @@ namespace MissionPlanner.Grid
             xmlcamera(true, Settings.GetUserDataDirectory() + "cameras.xml");
         }
 
-        private void BUT_Accept_Click(object sender, EventArgs e)
+        public void BUT_Accept_Click(object sender, EventArgs e)
         {
             if (grid != null && grid.Count > 0)
             {
+                CustomMessageBox.Show($"grid={grid.Count},\n{grid}");
                 MainV2.instance.FlightPlanner.quickadd = true;
 
                 if (NUM_split.Value > 1 && CHK_toandland.Checked != true)
@@ -1879,7 +1886,7 @@ namespace MissionPlanner.Grid
                 MainV2.instance.FlightPlanner.quickadd = false;
 
                 MainV2.instance.FlightPlanner.writeKML();
-
+                CustomMessageBox.Show("BUT_Accept_Click Success");
                 this.Close();
             }
             else
@@ -1906,13 +1913,13 @@ namespace MissionPlanner.Grid
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void NUM_Lane_Dist_ValueChanged(object sender, EventArgs e)
+        public void NUM_Lane_Dist_ValueChanged(object sender, EventArgs e)
         {
             // doCalc
             domainUpDown1_ValueChanged(sender, e);
         }
 
-        private void CMB_startfrom_SelectedIndexChanged(object sender, EventArgs e)
+        public void CMB_startfrom_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(loading)
                 return;

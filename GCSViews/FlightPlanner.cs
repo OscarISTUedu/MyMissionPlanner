@@ -54,6 +54,8 @@ using MissionPlanner.ArduPilot.Mavlink;
 using System.Drawing.Imaging;
 using SharpKml.Engine;
 using MissionPlanner.Controls.Waypoints;
+using static IronPython.Modules._ast;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MissionPlanner.GCSViews
 {
@@ -79,7 +81,8 @@ namespace MissionPlanner.GCSViews
                 but_mincommands.Text = @"˄";
             }
         }
-
+        public GridPlugin GridPlugin;//Plugin for grid feature by defolt
+        public GridUI GridUI;
         public static GMapOverlay airportsoverlay;
         public static GMapOverlay objectsoverlay;
         public static GMapOverlay poioverlay = new GMapOverlay("POI");
@@ -143,7 +146,7 @@ namespace MissionPlanner.GCSViews
         public void Init()
         {
             instance = this;
-
+           
 
 
             // config map
@@ -554,7 +557,7 @@ namespace MissionPlanner.GCSViews
         /// <param name="lat"></param>
         /// <param name="lng"></param>
         /// <param name="alt"></param>
-        public void AddWPToMap(double lat, double lng, int alt)
+        public void AddWPToMap(double lat, double lng, int alt)//click on map to make a waypoint
         {
             if (polygongridmode)
             {
@@ -7409,8 +7412,30 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     }
                     else
                     {
-                        AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                    }
+                        //CustomMessageBox.Show($"Commands.Rows= {Commands.Rows.Count}");
+                        if (Commands.Rows.Count<1)//While we can't make a grid route
+                        {
+                            AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                        }
+                        else if (Commands.Rows.Count == 1)
+                        {
+                            AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                            try
+                            {
+                                GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
+                                GridPlugin.Host = new PluginHost();
+                                GridUI = new GridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
+                                GridUI.GridUI_Load(GridUI, null);
+                                //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
+                            }
+                            catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
+                        }
+                        else if (Commands.Rows.Count > 1)
+                        {
+                            AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                            GridUI.BUT_Accept_Click(null, null);
+                        }
+                    } 
                 }
                 else
                 {
@@ -8223,6 +8248,11 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 contextMenuStripPoly.Show(GridPolygonToolPanel, btn.Location);
             }    
+        }
+
+        private void PolygonModBtn_Click(object sender, EventArgs e)
+        {
+            this.polygongridmode = !polygongridmode;
         }
     }
 }

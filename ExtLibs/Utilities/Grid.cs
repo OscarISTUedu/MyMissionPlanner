@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MissionPlanner.Utilities;
+using SixLabors.ImageSharp;
 
 namespace MissionPlanner.Utilities
 {
@@ -354,7 +355,6 @@ namespace MissionPlanner.Utilities
         public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1, double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin1, float leadin2, PointLatLngAlt HomeLocation, bool useextendedendpoint = true)
         {
             //DoDebug();
-
             if (spacing < 0.1 && spacing != 0)
                 spacing = 0.1;
 
@@ -743,7 +743,6 @@ namespace MissionPlanner.Utilities
 
             // set the altitude on all points
             ans.ForEach(plla => { plla.Alt = altitude; });
-
             return ans;
         }
 
