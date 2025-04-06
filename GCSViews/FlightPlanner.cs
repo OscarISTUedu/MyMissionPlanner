@@ -82,7 +82,7 @@ namespace MissionPlanner.GCSViews
             }
         }
         public GridPlugin GridPlugin;//Plugin for grid feature by defolt
-        public GridUI GridUI;
+        public HiddenGridUI GridUI;
         public static GMapOverlay airportsoverlay;
         public static GMapOverlay objectsoverlay;
         public static GMapOverlay poioverlay = new GMapOverlay("POI");
@@ -7424,7 +7424,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                             {
                                 GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
                                 GridPlugin.Host = new PluginHost();
-                                GridUI = new GridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
+                                GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
                                 GridUI.GridUI_Load(GridUI, null);
                                 //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
                             }
