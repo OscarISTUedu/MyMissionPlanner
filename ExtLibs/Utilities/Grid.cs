@@ -64,8 +64,7 @@ namespace MissionPlanner.Utilities
                 distance = 0.1;
 
             if (polygon.Count == 0)
-                return new List<PointLatLngAlt>();
-
+            return new List<PointLatLngAlt>();
             List<PointLatLngAlt> ans = new List<PointLatLngAlt>();
 
             // utm zone distance calcs will be done in
@@ -360,9 +359,13 @@ namespace MissionPlanner.Utilities
 
             if (distance < 0.1)
                 distance = 0.1;
+            //CustomMessageBox.Show($"altitude={altitude},distance={distance},polygon={string.Join(" ", polygon)}");
 
             if (polygon.Count == 0)
+            {
+                //CustomMessageBox.Show("in CreateGrid,polygon.Count == 0");
                 return new List<PointLatLngAlt>();
+            }
 
 
             // Make a non round number in case of corner cases

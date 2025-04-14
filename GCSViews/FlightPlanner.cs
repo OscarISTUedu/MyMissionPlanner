@@ -278,7 +278,7 @@ namespace MissionPlanner.GCSViews
             //setup drawnpolgon
             List<PointLatLng> polygonPoints2 = new List<PointLatLng>();
             drawnpolygon = new GMapPolygon(polygonPoints2, "drawnpoly");
-            drawnpolygon.Stroke = new Pen(Color.Red, 2);
+            drawnpolygon.Stroke = new Pen(Color.Red, 2);//red waypoint
             drawnpolygon.Fill = Brushes.Transparent;
 
             /*
@@ -567,11 +567,12 @@ namespace MissionPlanner.GCSViews
 
             if (sethome)
             {
+                CustomMessageBox.Show("AddWPToMap->sethome");
                 sethome = false;
                 callMeDrag("H", lat, lng, alt);
                 return;
             }
-            // creating a WP
+            // creating a yellow WP
 
             selectedrow = Commands.Rows.Add();
 
@@ -1722,7 +1723,7 @@ namespace MissionPlanner.GCSViews
             }
         }
 
-        public void addPolygonPointToolStripMenuItem_Click(object sender, EventArgs e)
+        public void addPolygonPointToolStripMenuItem_Click(object sender, EventArgs e)//add red waypoint
         {
             if (polygongridmode == false)
             {
@@ -1742,7 +1743,79 @@ namespace MissionPlanner.GCSViews
             // remove full loop is exists
             if (drawnpolygon.Points.Count > 1 &&
                 drawnpolygon.Points[0] == drawnpolygon.Points[drawnpolygon.Points.Count - 1])
+            {
                 drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1); // unmake a full loop
+                CustomMessageBox.Show("drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1);");
+            }
+
+            drawnpolygon.Points.Add(new PointLatLng(MouseDownStart.Lat, MouseDownStart.Lng));
+
+            redrawPolygonSurvey(drawnpolygon.Points.Select(a => new PointLatLngAlt(a)).ToList());
+
+            MainMap.Invalidate();
+
+            //if (drawnpolygon.Points.Count==2)
+            //{
+            //    try
+            //    {
+            //        GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
+            //        GridPlugin.Host = new PluginHost();
+            //        GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
+            //        //GridUI.GridUI_Load(GridUI, null);
+            //    }
+            //    catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
+            //}
+            //if (drawnpolygon.Points.Count >= 3)
+            //{
+            //    GridUI.GridUI_Load(GridUI, null);
+            //    GridUI.BUT_Accept_Click(null, null);
+            //}
+
+            //CustomMessageBox.Show($"drawnpolygon.Points.Count={drawnpolygon.Points.Count}");
+
+            //
+            //if (Commands.Rows.Count < 1)//While we can't make a grid route
+            //{
+            //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+            //}
+            //else if (Commands.Rows.Count == 1)
+            //{
+            //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+            //    try
+            //    {
+            //        GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
+            //        GridPlugin.Host = new PluginHost();
+            //        GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
+            //        GridUI.GridUI_Load(GridUI, null);
+            //        //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
+            //    }
+            //    catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
+            //}
+            //else if (Commands.Rows.Count > 1)
+            //{
+            //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+            //    GridUI.BUT_Accept_Click(null, null);
+            //}
+            //
+        }
+
+        public void addRedPolygon(object sender, EventArgs e)//add red waypoint
+        {
+            List<PointLatLng> polygonPoints = new List<PointLatLng>();
+            if (drawnpolygonsoverlay.Polygons.Count == 0)
+            {
+                drawnpolygon.Points.Clear();
+                drawnpolygonsoverlay.Polygons.Add(drawnpolygon);
+            }
+
+            drawnpolygon.Fill = Brushes.Transparent;
+
+            // remove full loop is exists
+            if (drawnpolygon.Points.Count > 1 &&
+                drawnpolygon.Points[0] == drawnpolygon.Points[drawnpolygon.Points.Count - 1])
+            {
+                drawnpolygon.Points.RemoveAt(drawnpolygon.Points.Count - 1); // unmake a full loop
+            }
 
             drawnpolygon.Points.Add(new PointLatLng(MouseDownStart.Lat, MouseDownStart.Lng));
 
@@ -1750,6 +1823,47 @@ namespace MissionPlanner.GCSViews
 
             MainMap.Invalidate();
         }
+
+        public void addYellowPolygon(double lat, double lng, int alt)
+        {
+            if (sethome)
+            {
+                CustomMessageBox.Show("AddWPToMap->sethome");
+                sethome = false;
+                callMeDrag("H", lat, lng, alt);
+                return;
+            }
+            // creating a yellow WP
+
+            selectedrow = Commands.Rows.Add();
+
+            if ((MAVLink.MAV_MISSION_TYPE)cmb_missiontype.SelectedValue == MAVLink.MAV_MISSION_TYPE.RALLY)
+            {
+                Commands.Rows[selectedrow].Cells[Command.Index].Value = MAVLink.MAV_CMD.RALLY_POINT.ToString();
+                ChangeColumnHeader(MAVLink.MAV_CMD.RALLY_POINT.ToString());
+            }
+            else if ((MAVLink.MAV_MISSION_TYPE)cmb_missiontype.SelectedValue == MAVLink.MAV_MISSION_TYPE.FENCE)
+            {
+                Commands.Rows[selectedrow].Cells[Command.Index].Value =
+                    MAVLink.MAV_CMD.FENCE_CIRCLE_EXCLUSION.ToString();
+                Commands.Rows[selectedrow].Cells[Param1.Index].Value = 5;
+                ChangeColumnHeader(MAVLink.MAV_CMD.FENCE_CIRCLE_EXCLUSION.ToString());
+            }
+            else if (splinemode)
+            {
+                Commands.Rows[selectedrow].Cells[Command.Index].Value = MAVLink.MAV_CMD.SPLINE_WAYPOINT.ToString();
+                ChangeColumnHeader(MAVLink.MAV_CMD.SPLINE_WAYPOINT.ToString());
+            }
+            else
+            {
+                Commands.Rows[selectedrow].Cells[Command.Index].Value = MAVLink.MAV_CMD.WAYPOINT.ToString();
+                ChangeColumnHeader(MAVLink.MAV_CMD.WAYPOINT.ToString());
+            }
+            updateUndoBuffer(false);
+            setfromMap(lat, lng, alt);
+        }
+
+
 
         public void areaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -7413,28 +7527,58 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     else
                     {
                         //CustomMessageBox.Show($"Commands.Rows= {Commands.Rows.Count}");
-                        if (Commands.Rows.Count<1)//While we can't make a grid route
+                        //if (Commands.Rows.Count < 1)//While we can't make a grid route
+                        //{
+                        //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                        //}
+                        //else if (Commands.Rows.Count == 1)
+                        //{
+                        //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                        //    try
+                        //    {
+                        //        GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
+                        //        GridPlugin.Host = new PluginHost();
+                        //        GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
+                        //        GridUI.GridUI_Load(GridUI, null);
+                        //        //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
+                        //    }
+                        //    catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
+                        //}
+                        //else if (Commands.Rows.Count > 1)
+                        //{
+                        //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                        //    GridUI.BUT_Accept_Click(null, null);
+                        //}
+                        //AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
+                        if (polygongridmode)
                         {
-                            AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                        }
-                        else if (Commands.Rows.Count == 1)
-                        {
-                            AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                            try
+                            if (this.drawnpolygon.Points.Count == 0)
                             {
+                                //CustomMessageBox.Show($"drawnpolygon.Points.Count={drawnpolygon.Points.Count}");
                                 GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
                                 GridPlugin.Host = new PluginHost();
                                 GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
-                                GridUI.GridUI_Load(GridUI, null);
-                                //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
+                                addRedPolygon(null, null);
                             }
-                            catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
+                            else if (this.drawnpolygon.Points.Count==1)
+                            {
+                                //CustomMessageBox.Show($"drawnpolygon.Points.Count={drawnpolygon.Points.Count}");
+                                addRedPolygon(null, null);
+                                //GridUI.GridUI_Load(GridUI, null);
+                                //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
+                            } 
+                            else if (this.drawnpolygon.Points.Count >= 2)
+                            {
+                                addRedPolygon(null, null);
+                                //CustomMessageBox.Show($"this.drawnpolygon.Points={this.drawnpolygon.Points}");
+                                this.drawnpolygon.Points.ForEach(x => { GridUI.list.Add(x); });
+                                GridUI.GridUI_Load(GridUI, null);
+                                //CustomMessageBox.Show($"GridUI.list.Count={GridUI.list.Count}");
+                                GridUI.BUT_Accept_Click(null, null);
+                            }
                         }
-                        else if (Commands.Rows.Count > 1)
-                        {
-                            AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                            GridUI.BUT_Accept_Click(null, null);
-                        }
+                        else 
+                        addYellowPolygon(currentMarker.Position.Lat, currentMarker.Position.Lng, 0); 
                     } 
                 }
                 else
