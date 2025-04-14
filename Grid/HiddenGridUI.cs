@@ -40,8 +40,8 @@ namespace MissionPlanner.Grid
 
         GMapOverlay routesOverlay;
         GMapOverlay kmlpolygonsoverlay;
-        List<PointLatLngAlt> list = new List<PointLatLngAlt>();
-        List<PointLatLngAlt> grid;
+        public List<PointLatLngAlt> list = new List<PointLatLngAlt>();
+        public List<PointLatLngAlt> grid;
         bool loadedfromfile = false;
         bool loading = false;
 
@@ -580,10 +580,13 @@ namespace MissionPlanner.Grid
         }
 
         // Do Work
-        private async void domainUpDown1_ValueChanged(object sender, EventArgs e)
+        private void domainUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (loading)
+            {
+                //CustomMessageBox.Show("loading in domainUpDown1_ValueChanged");
                 return;
+            }
 
             if (CMB_camera.Text != "")
             {
@@ -594,30 +597,30 @@ namespace MissionPlanner.Grid
 
             if (chk_Corridor.Checked)
             {
-                grid = await Utilities.Grid.CreateCorridorAsync(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
+                grid = Utilities.Grid.CreateCorridor(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
                     (double)NUM_Distance.Value, (double)NUM_spacing.Value, (double)NUM_angle.Value,
                     (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
                     (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
-                    (float)NUM_Lane_Dist.Value, (float)num_corridorwidth.Value, (float)NUM_leadin.Value).ConfigureAwait(true);
+                    (float)NUM_Lane_Dist.Value, (float)num_corridorwidth.Value, (float)NUM_leadin.Value);
             }
             else if (chk_spiral.Checked)
             {
-                grid = await Utilities.Grid.CreateRotaryAsync(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
+                grid = Utilities.Grid.CreateRotary(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
                     (double)NUM_Distance.Value, (double)NUM_spacing.Value, (double)NUM_angle.Value,
                     (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
                     (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
                     (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.PlannedHomeLocation,
-                    (int)NUM_clockwise_laps.Value, CHK_match_spiral_perimeter.Checked, (int)NUM_laps.Value).ConfigureAwait(true);
+                    (int)NUM_clockwise_laps.Value, CHK_match_spiral_perimeter.Checked, (int)NUM_laps.Value);
             }
             else
             {
-                grid = await Utilities.Grid.CreateGridAsync(list,
+                grid = Utilities.Grid.CreateGrid(list,
                     CurrentState.fromDistDisplayUnit((double) NUM_altitude.Value),
                     (double) NUM_Distance.Value, (double) NUM_spacing.Value, (double) NUM_angle.Value,
                     (double) NUM_overshoot.Value, (double) NUM_overshoot2.Value,
                     (Utilities.Grid.StartPosition) Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text),
                     false, (float) NUM_Lane_Dist.Value, (float) NUM_leadin.Value, (float) NUM_leadin2.Value,
-                    MainV2.comPort.MAV.cs.PlannedHomeLocation, chk_optimize_for_distance.Checked).ConfigureAwait(true);
+                    MainV2.comPort.MAV.cs.PlannedHomeLocation, chk_optimize_for_distance.Checked);
             }
 
             map.HoldInvalidation = true;
@@ -631,6 +634,7 @@ namespace MissionPlanner.Grid
             if (grid.Count == 0)
             {
                 map.ZoomAndCenterMarkers("routes");
+                //CustomMessageBox.Show("after calc grid,it eval 0");
                 return;
             }
 
@@ -639,13 +643,13 @@ namespace MissionPlanner.Grid
                 // add crossover
                 Utilities.Grid.StartPointLatLngAlt = grid[grid.Count - 1];
 
-                grid.AddRange(await Utilities.Grid.CreateGridAsync(list,
+                grid.AddRange(Utilities.Grid.CreateGrid(list,
                     CurrentState.fromDistDisplayUnit((double) NUM_altitude.Value),
                     (double) NUM_Distance.Value, (double) NUM_spacing.Value, (double) NUM_angle.Value + 90.0,
                     (double) NUM_overshoot.Value, (double) NUM_overshoot2.Value,
                     Utilities.Grid.StartPosition.Point, false,
                     (float) NUM_Lane_Dist.Value, (float) NUM_leadin.Value, (float) NUM_leadin2.Value,
-                    MainV2.comPort.MAV.cs.PlannedHomeLocation, chk_optimize_for_distance.Checked).ConfigureAwait(true));
+                    MainV2.comPort.MAV.cs.PlannedHomeLocation, chk_optimize_for_distance.Checked));
             }
 
             if (CHK_boundary.Checked)
@@ -653,6 +657,7 @@ namespace MissionPlanner.Grid
 
             if (grid.Count == 0)
             {
+                //CustomMessageBox.Show("domainUpDown1_ValueChanged -> grid.Count == 0");
                 map.ZoomAndCenterMarkers("routes");
                 return;
             }
@@ -885,7 +890,7 @@ namespace MissionPlanner.Grid
                 map.ZoomAndCenterMarkers("routes");
 
             CalcHeadingHold();
-            CustomMessageBox.Show($"Success domainUpDown1_ValueChanged()");
+            //CustomMessageBox.Show($"Success domainUpDown1_ValueChanged()");
 
             map.Invalidate();
         }
@@ -1611,7 +1616,7 @@ namespace MissionPlanner.Grid
         {
             if (grid != null && grid.Count > 0)
             {
-                CustomMessageBox.Show($"grid={grid.Count},\n{grid}");
+                //CustomMessageBox.Show($"grid={grid.Count},\n{grid}\npenis");
                 MainV2.instance.FlightPlanner.quickadd = true;
 
                 if (NUM_split.Value > 1 && CHK_toandland.Checked != true)
@@ -1886,7 +1891,7 @@ namespace MissionPlanner.Grid
                 MainV2.instance.FlightPlanner.quickadd = false;
 
                 MainV2.instance.FlightPlanner.writeKML();
-                CustomMessageBox.Show("BUT_Accept_Click Success");
+                //CustomMessageBox.Show("BUT_Accept_Click Success");
                 this.Close();
             }
             else
