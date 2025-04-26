@@ -580,11 +580,10 @@ namespace MissionPlanner.Grid
         }
 
         // Do Work
-        private void domainUpDown1_ValueChanged(object sender, EventArgs e)
+        public void domainUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (loading)
             {
-                //CustomMessageBox.Show("loading in domainUpDown1_ValueChanged");
                 return;
             }
 

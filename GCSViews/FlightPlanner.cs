@@ -7526,35 +7526,10 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     }
                     else
                     {
-                        //CustomMessageBox.Show($"Commands.Rows= {Commands.Rows.Count}");
-                        //if (Commands.Rows.Count < 1)//While we can't make a grid route
-                        //{
-                        //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                        //}
-                        //else if (Commands.Rows.Count == 1)
-                        //{
-                        //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                        //    try
-                        //    {
-                        //        GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
-                        //        GridPlugin.Host = new PluginHost();
-                        //        GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
-                        //        GridUI.GridUI_Load(GridUI, null);
-                        //        //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
-                        //    }
-                        //    catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
-                        //}
-                        //else if (Commands.Rows.Count > 1)
-                        //{
-                        //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-                        //    GridUI.BUT_Accept_Click(null, null);
-                        //}
-                        //AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
                         if (polygongridmode)
                         {
                             if (this.drawnpolygon.Points.Count == 0)
                             {
-                                //CustomMessageBox.Show($"drawnpolygon.Points.Count={drawnpolygon.Points.Count}");
                                 GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
                                 GridPlugin.Host = new PluginHost();
                                 GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
@@ -7562,18 +7537,15 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                             }
                             else if (this.drawnpolygon.Points.Count==1)
                             {
-                                //CustomMessageBox.Show($"drawnpolygon.Points.Count={drawnpolygon.Points.Count}");
                                 addRedPolygon(null, null);
-                                //GridUI.GridUI_Load(GridUI, null);
-                                //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
                             } 
                             else if (this.drawnpolygon.Points.Count >= 2)
                             {
                                 addRedPolygon(null, null);
-                                //CustomMessageBox.Show($"this.drawnpolygon.Points={this.drawnpolygon.Points}");
+                                GridUI.list.Clear();
+                                Commands.Rows.Clear();
                                 this.drawnpolygon.Points.ForEach(x => { GridUI.list.Add(x); });
                                 GridUI.GridUI_Load(GridUI, null);
-                                //CustomMessageBox.Show($"GridUI.list.Count={GridUI.list.Count}");
                                 GridUI.BUT_Accept_Click(null, null);
                             }
                         }
@@ -7628,12 +7600,19 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         {
                             try
                             {
+                                //CustomMessageBox.Show($"{drawnpolygon.Points[int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) -1]}\n" +
+                                //    $"{GridUI.list[int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) - 1]}");
+                                    
                                 drawnpolygon.Points[
                                         int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) -
                                         1] =
                                     new PointLatLng(MouseDownEnd.Lat, MouseDownEnd.Lng);
+                                GridUI.list[int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) - 1] = new PointLatLng(MouseDownEnd.Lat, MouseDownEnd.Lng);
+                                Commands.Rows.Clear();
                                 MainMap.UpdatePolygonLocalPosition(drawnpolygon);
                                 MainMap.Invalidate();
+                                GridUI.GridUI_Load(GridUI, null);
+                                GridUI.BUT_Accept_Click(null, null);
                             }
                             catch (Exception ex)
                             {
@@ -7644,6 +7623,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         {
                             callMeDrag(CurentRectMarker.InnerMarker.Tag.ToString(), currentMarker.Position.Lat,
                                 currentMarker.Position.Lng, -2);
+                            //CustomMessageBox.Show("moved");
                         }
 
                         CurentRectMarker = null;

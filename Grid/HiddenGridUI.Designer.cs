@@ -1469,7 +1469,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "GridUI";
             //this.Load += new System.EventHandler(this.GridUI_Load);
-            this.Resize += new System.EventHandler(this.GridUI_Resize);
+            //this.Resize += new System.EventHandler(this.GridUI_Resize);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.tabCamera.ResumeLayout(false);
