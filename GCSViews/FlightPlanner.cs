@@ -7600,9 +7600,6 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         {
                             try
                             {
-                                //CustomMessageBox.Show($"{drawnpolygon.Points[int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) -1]}\n" +
-                                //    $"{GridUI.list[int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) - 1]}");
-                                    
                                 drawnpolygon.Points[
                                         int.Parse(CurentRectMarker.InnerMarker.Tag.ToString().Replace("grid", "")) -
                                         1] =
@@ -7623,7 +7620,6 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         {
                             callMeDrag(CurentRectMarker.InnerMarker.Tag.ToString(), currentMarker.Position.Lat,
                                 currentMarker.Position.Lng, -2);
-                            //CustomMessageBox.Show("moved");
                         }
 
                         CurentRectMarker = null;
