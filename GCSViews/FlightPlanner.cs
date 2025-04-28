@@ -141,14 +141,13 @@ namespace MissionPlanner.GCSViews
         public GMapOverlay top;
         public GMapPolygon wppolygon;
         private GMapMarker CurrentMidLine;
-
+        public int curProject;
+        public List<Project> projects = new List<Project>();
 
         public void Init()
         {
             instance = this;
            
-
-
             // config map
             MainMap.CacheLocation = Settings.GetDataDirectory() +
                                     "gmapcache" + Path.DirectorySeparatorChar;
@@ -290,6 +289,11 @@ namespace MissionPlanner.GCSViews
 
             timer.Start();
             */
+
+            // project tree init
+            projects.Add(new Project("Проект №1"));
+            curProject = treeProject.Nodes.Add(new TreeNode("Проект №1"));
+            treeProject.SelectedNode = treeProject.Nodes[curProject];
         }
 
         public static FlightPlanner instance { get; set; }
@@ -1754,49 +1758,6 @@ namespace MissionPlanner.GCSViews
 
             MainMap.Invalidate();
 
-            //if (drawnpolygon.Points.Count==2)
-            //{
-            //    try
-            //    {
-            //        GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
-            //        GridPlugin.Host = new PluginHost();
-            //        GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
-            //        //GridUI.GridUI_Load(GridUI, null);
-            //    }
-            //    catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
-            //}
-            //if (drawnpolygon.Points.Count >= 3)
-            //{
-            //    GridUI.GridUI_Load(GridUI, null);
-            //    GridUI.BUT_Accept_Click(null, null);
-            //}
-
-            //CustomMessageBox.Show($"drawnpolygon.Points.Count={drawnpolygon.Points.Count}");
-
-            //
-            //if (Commands.Rows.Count < 1)//While we can't make a grid route
-            //{
-            //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-            //}
-            //else if (Commands.Rows.Count == 1)
-            //{
-            //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-            //    try
-            //    {
-            //        GridPlugin = new GridPlugin();//Plugin for grid feature by defolt
-            //        GridPlugin.Host = new PluginHost();
-            //        GridUI = new HiddenGridUI(GridPlugin);//GridPlugin.Host.FPDrawnPolygon.Points - red points
-            //        GridUI.GridUI_Load(GridUI, null);
-            //        //CustomMessageBox.Show($"GridUI.grid={string.Join(" ", GridUI.grid)}");
-            //    }
-            //    catch (Exception ex) { CustomMessageBox.Show($"ex= {ex}"); }
-            //}
-            //else if (Commands.Rows.Count > 1)
-            //{
-            //    AddWPToMap(currentMarker.Position.Lat, currentMarker.Position.Lng, 0);
-            //    GridUI.BUT_Accept_Click(null, null);
-            //}
-            //
         }
 
         public void addRedPolygon(object sender, EventArgs e)//add red waypoint
@@ -1858,6 +1819,8 @@ namespace MissionPlanner.GCSViews
             {
                 Commands.Rows[selectedrow].Cells[Command.Index].Value = MAVLink.MAV_CMD.WAYPOINT.ToString();
                 ChangeColumnHeader(MAVLink.MAV_CMD.WAYPOINT.ToString());
+                //project system
+                this.projects[curProject].missions[this.projects[curProject].selectedMission].commands.Rows[selectedrow].Cells[Command.Index].Value = MAVLink.MAV_CMD.WAYPOINT.ToString();
             }
             updateUndoBuffer(false);
             setfromMap(lat, lng, alt);
@@ -7388,30 +7351,6 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 return;
             }
 
-            // check if the mouse up happend over our button
-            /*
-            if (polyicon.Rectangle.Contains(e.Location))//Polygon btn functionality
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    polyicon.IsSelected = false;
-                    clearPolygonToolStripMenuItem_Click(this, null);
-
-                    contextMenuStrip1.Visible = false;
-
-                    return;
-                }
-
-                contextMenuStripPoly.Show(ToolPanel, e.Location);
-                return;
-            }
-
-            if (zoomicon.Rectangle.Contains(e.Location))//Zomm btn functionality
-            {
-                contextMenuStripZoom.Show(ToolPanel, e.Location);
-                return;
-            }
-            */
             MouseDownEnd = MainMap.FromLocalToLatLng(e.X, e.Y);
 
             // Console.WriteLine("MainMap MU");
@@ -8373,6 +8312,28 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
         private void PolygonModBtn_Click(object sender, EventArgs e)
         {
             this.polygongridmode = !polygongridmode;
+        }
+        private void treeProject_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeView node = sender as TreeView;
+            if (node != null)
+            {
+                for (int i = 0; i < this.treeProject.Nodes.Count; i++)
+                {
+                    this.treeProject.Nodes[i].ForeColor = default;
+                    this.treeProject.Nodes[i].BackColor = default;
+                }
+                if (node.SelectedNode != null)
+                {
+                    node.SelectedNode.ForeColor = Color.Black;
+                    node.SelectedNode.BackColor = Color.White;
+                }
+                else
+                {
+                    node.Nodes[0].ForeColor = Color.Black;
+                    node.Nodes[0].BackColor = Color.White;
+                }
+            }
         }
     }
 }

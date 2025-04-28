@@ -242,6 +242,10 @@ namespace MissionPlanner
             //this.topMenu.MenuItems.Add("Настройки");
             this.Menu = topMenu;
             //
+            //topMenu.MenuItems[0] Новый проект
+            //
+            this.topMenu.MenuItems[0].MenuItems[0].Click += new System.EventHandler(this.NewProjectClick);
+            //
             // MainV2
             // 
             resources.ApplyResources(this, "$this");

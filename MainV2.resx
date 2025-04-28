@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>155, 17</value>
+    <value>258, 17</value>
   </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="MainMenu.AutoSize" type="System.Boolean, mscorlib">
@@ -283,7 +283,7 @@
 </value>
   </data>
   <metadata name="CTX_mainmenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>120, 17</value>
   </metadata>
   <data name="autoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 22</value>
@@ -883,7 +883,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menu.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="status1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -904,7 +904,7 @@
     <value>status1</value>
   </data>
   <data name="&gt;&gt;status1.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.Status, MissionPlanner, Version=1.3.9193.15982, Culture=neutral, PublicKeyToken=null</value>
+    <value>MissionPlanner.Controls.Status, MissionPlanner, Version=1.3.9248.20984, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;status1.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -940,125 +940,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="TopToolsmenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>267, 17</value>
-  </metadata>
-  <data name="openEditorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 22</value>
-  </data>
-  <data name="openEditorToolStripMenuItem.Text" xml:space="preserve">
-    <value>Открыть редактор</value>
-  </data>
-  <data name="kmlToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 22</value>
-  </data>
-  <data name="kmlToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Инструменты работы с KML</value>
-  </data>
-  <data name="makePointToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 22</value>
-  </data>
-  <data name="makePointToolStripMenuItem.Text" xml:space="preserve">
-    <value>Создать метку</value>
-  </data>
-  <data name="makeGridToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 22</value>
-  </data>
-  <data name="makeGridToolStripMenuItem.Text" xml:space="preserve">
-    <value>Создать площадную аэрофотосъемку</value>
-  </data>
-  <data name="hideMissionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
-  </data>
-  <data name="hideMissionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Скрыть маршрут</value>
-  </data>
-  <data name="ViewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
-  </data>
-  <data name="ViewToolStripMenuItem.Text" xml:space="preserve">
-    <value>Вид</value>
-  </data>
-  <data name="measuringToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 22</value>
-  </data>
-  <data name="measuringToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Инструменты измерений</value>
-  </data>
-  <data name="makeGridToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 22</value>
-  </data>
-  <data name="makeGridToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Создать сетку</value>
-  </data>
-  <data name="ToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
-  </data>
-  <data name="ToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Инструменты</value>
-  </data>
-  <data name="connectDroneToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 22</value>
-  </data>
-  <data name="connectDroneToolStripMenuItem.Text" xml:space="preserve">
-    <value>Подключить БВС</value>
-  </data>
-  <data name="LinkFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 22</value>
-  </data>
-  <data name="LinkFileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Файл привязки</value>
-  </data>
-  <data name="geodesyPostProcessingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 22</value>
-  </data>
-  <data name="geodesyPostProcessingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Постобработка геодезических наблюдений</value>
-  </data>
-  <data name="FlightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
-  </data>
-  <data name="FlightToolStripMenuItem.Text" xml:space="preserve">
-    <value>Полёт</value>
-  </data>
-  <data name="SettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 20</value>
-  </data>
-  <data name="SettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Настройки</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 20</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Помощь</value>
-  </data>
-  <data name="TopToolsmenuStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TopToolsmenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>944, 24</value>
-  </data>
-  <data name="TopToolsmenuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="TopToolsmenuStrip.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;TopToolsmenuStrip.Name" xml:space="preserve">
-    <value>TopToolsmenuStrip</value>
-  </data>
-  <data name="&gt;&gt;TopToolsmenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TopToolsmenuStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TopToolsmenuStrip.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="topMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2798,6 +2684,15 @@
   </data>
   <data name="&gt;&gt;toolStripConnectionControl.Name" xml:space="preserve">
     <value>toolStripConnectionControl</value>
+  </data>
+  <data name="&gt;&gt;toolStripConnectionControl.Type" xml:space="preserve">
+    <value>MissionPlanner.Controls.ToolStripConnectionControl, MissionPlanner, Version=1.3.9248.20984, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;topMenu.Name" xml:space="preserve">
+    <value>topMenu</value>
+  </data>
+  <data name="&gt;&gt;topMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MainMenu, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainV2</value>

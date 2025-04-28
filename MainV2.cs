@@ -11,6 +11,7 @@ using MissionPlanner.GCSViews.ConfigurationView;
 using MissionPlanner.Log;
 using MissionPlanner.Maps;
 using MissionPlanner.Utilities;
+using MissionPlanner.GCSViews;
 
 using MissionPlanner.Warnings;
 using SkiaSharp;
@@ -4802,7 +4803,13 @@ namespace MissionPlanner
             }
         }
 
-
+        private void NewProjectClick(object sender, EventArgs e)
+        {
+            int curProject = FlightPlanner.treeProject.Nodes.Add(new TreeNode($"Проект№ {FlightPlanner.treeProject.Nodes.Count+1}"));
+            FlightPlanner.projects.Add(new Project($"Проект№ {curProject}"));
+            FlightPlanner.curProject = curProject;
+            FlightPlanner.treeProject.SelectedNode = FlightPlanner.treeProject.Nodes[curProject];
+        }
 
     }
 }
